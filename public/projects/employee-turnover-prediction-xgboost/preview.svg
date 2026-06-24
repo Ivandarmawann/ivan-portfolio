@@ -1,0 +1,92 @@
+<svg viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#0a0a0a"/>
+  <!-- Browser chrome -->
+  <rect width="1600" height="48" fill="#141414"/>
+  <line x1="0" y1="48" x2="1600" y2="48" stroke="#222" stroke-width="1"/>
+  <circle cx="28" cy="24" r="6" fill="#ff5f56"/>
+  <circle cx="50" cy="24" r="6" fill="#ffbd2e"/>
+  <circle cx="72" cy="24" r="6" fill="#27c93f"/>
+  <rect x="200" y="14" width="360" height="20" rx="10" fill="#222"/>
+  <text x="380" y="29" fill="#666" font-size="11" font-family="monospace" text-anchor="middle" dominant-baseline="middle">analytics.dashboard / employee-turnover</text>
+  <!-- Dashboard header -->
+  <rect y="48" width="1600" height="60" fill="#111"/>
+  <text x="60" y="80" fill="#eee" font-size="20" font-weight="bold" font-family="sans-serif" dominant-baseline="middle">Employee Turnover Dashboard</text>
+  <text x="1540" y="80" fill="#666" font-size="12" font-family="sans-serif" text-anchor="end" dominant-baseline="middle">Last updated: Dec 2025</text>
+  <line x1="0" y1="108" x2="1600" y2="108" stroke="#1a1a1a" stroke-width="1"/>
+  <!-- KPI cards -->
+  <rect x="60" y="130" width="340" height="110" rx="10" fill="#141414" stroke="#222" stroke-width="1"/>
+  <text x="80" y="155" fill="#666" font-size="11" font-family="sans-serif" dominant-baseline="middle">TOTAL EMPLOYEES</text>
+  <text x="80" y="200" fill="#eee" font-size="36" font-weight="bold" font-family="sans-serif" dominant-baseline="middle">1,234</text>
+  <text x="80" y="225" fill="#666" font-size="12" font-family="sans-serif" dominant-baseline="middle">Across 12 departments</text>
+  <rect x="440" y="130" width="340" height="110" rx="10" fill="#141414" stroke="#222" stroke-width="1"/>
+  <text x="460" y="155" fill="#666" font-size="11" font-family="sans-serif" dominant-baseline="middle">AT-RISK EMPLOYEES</text>
+  <text x="460" y="200" fill="#f59e0b" font-size="36" font-weight="bold" font-family="sans-serif" dominant-baseline="middle">89</text>
+  <text x="460" y="225" fill="#666" font-size="12" font-family="sans-serif" dominant-baseline="middle">High turnover probability</text>
+  <rect x="820" y="130" width="340" height="110" rx="10" fill="#141414" stroke="#222" stroke-width="1"/>
+  <text x="840" y="155" fill="#666" font-size="11" font-family="sans-serif" dominant-baseline="middle">TURNOVER RATE</text>
+  <text x="840" y="200" fill="#ef4444" font-size="36" font-weight="bold" font-family="sans-serif" dominant-baseline="middle">7.2%</text>
+  <text x="840" y="225" fill="#666" font-size="12" font-family="sans-serif" dominant-baseline="middle">+2.1% from last quarter</text>
+  <rect x="1200" y="130" width="340" height="110" rx="10" fill="#141414" stroke="#222" stroke-width="1"/>
+  <text x="1220" y="155" fill="#666" font-size="11" font-family="sans-serif" dominant-baseline="middle">MODEL ACCURACY</text>
+  <text x="1220" y="200" fill="#22c55e" font-size="36" font-weight="bold" font-family="sans-serif" dominant-baseline="middle">87.3%</text>
+  <text x="1220" y="225" fill="#666" font-size="12" font-family="sans-serif" dominant-baseline="middle">XGBoost classifier</text>
+  <!-- Chart area -->
+  <rect x="60" y="270" width="920" height="460" rx="10" fill="#141414" stroke="#222" stroke-width="1"/>
+  <text x="80" y="295" fill="#eee" font-size="14" font-weight="600" font-family="sans-serif" dominant-baseline="middle">Turnover Risk by Department</text>
+  <text x="80" y="315" fill="#666" font-size="11" font-family="sans-serif" dominant-baseline="middle">Predicted probability (next 6 months)</text>
+  <!-- Bars -->
+  <rect x="100" y="430" width="80" height="240" rx="4" fill="#2563eb" opacity="0.6"/>
+  <rect x="100" y="430" width="80" height="80" rx="4" fill="#2563eb"/>
+  <text x="140" y="690" fill="#666" font-size="11" font-family="sans-serif" text-anchor="middle">Sales</text>
+  <rect x="210" y="380" width="80" height="290" rx="4" fill="#2563eb" opacity="0.6"/>
+  <rect x="210" y="380" width="80" height="130" rx="4" fill="#2563eb"/>
+  <text x="250" y="690" fill="#666" font-size="11" font-family="sans-serif" text-anchor="middle">Engineer</text>
+  <rect x="320" y="450" width="80" height="220" rx="4" fill="#2563eb" opacity="0.6"/>
+  <rect x="320" y="450" width="80" height="60" rx="4" fill="#2563eb"/>
+  <text x="360" y="690" fill="#666" font-size="11" font-family="sans-serif" text-anchor="middle">Finance</text>
+  <rect x="430" y="490" width="80" height="180" rx="4" fill="#2563eb" opacity="0.6"/>
+  <rect x="430" y="490" width="80" height="20" rx="4" fill="#2563eb"/>
+  <text x="470" y="690" fill="#666" font-size="11" font-family="sans-serif" text-anchor="middle">HR</text>
+  <rect x="540" y="410" width="80" height="260" rx="4" fill="#2563eb" opacity="0.6"/>
+  <rect x="540" y="410" width="80" height="100" rx="4" fill="#2563eb"/>
+  <text x="580" y="690" fill="#666" font-size="11" font-family="sans-serif" text-anchor="middle">IT</text>
+  <rect x="650" y="520" width="80" height="150" rx="4" fill="#2563eb" opacity="0.6"/>
+  <rect x="650" y="520" width="80" height="150" rx="4" fill="#2563eb" opacity="0.6"/>
+  <text x="690" y="690" fill="#666" font-size="11" font-family="sans-serif" text-anchor="middle">O-ps</text>
+  <!-- Y-axis labels -->
+  <text x="80" y="330" fill="#555" font-size="10" font-family="sans-serif" text-anchor="end">40%</text>
+  <line x1="90" y1="335" x2="950" y2="335" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="80" y="430" fill="#555" font-size="10" font-family="sans-serif" text-anchor="end">30%</text>
+  <line x1="90" y1="435" x2="950" y2="435" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="80" y="530" fill="#555" font-size="10" font-family="sans-serif" text-anchor="end">20%</text>
+  <line x1="90" y1="535" x2="950" y2="535" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="80" y="630" fill="#555" font-size="10" font-family="sans-serif" text-anchor="end">10%</text>
+  <line x1="90" y1="635" x2="950" y2="635" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,4"/>
+  <!-- Feature importance panel -->
+  <rect x="1020" y="270" width="520" height="460" rx="10" fill="#141414" stroke="#222" stroke-width="1"/>
+  <text x="1040" y="295" fill="#eee" font-size="14" font-weight="600" font-family="sans-serif" dominant-baseline="middle">Top Predictive Features</text>
+  <text x="1040" y="315" fill="#666" font-size="11" font-family="sans-serif" dominant-baseline="middle">XGBoost feature importance</text>
+  <!-- Feature bars -->
+  <text x="1040" y="355" fill="#ccc" font-size="12" font-family="sans-serif" dominant-baseline="middle">Years at company</text>
+  <rect x="1180" y="345" width="180" height="8" rx="4" fill="#1a1a1a"/>
+  <rect x="1180" y="345" width="170" height="8" rx="4" fill="#2563eb"/>
+  <text x="1370" y="355" fill="#888" font-size="11" font-family="sans-serif" dominant-baseline="middle">0.28</text>
+  <text x="1040" y="385" fill="#ccc" font-size="12" font-family="sans-serif" dominant-baseline="middle">Overtime hours</text>
+  <rect x="1180" y="375" width="180" height="8" rx="4" fill="#1a1a1a"/>
+  <rect x="1180" y="375" width="150" height="8" rx="4" fill="#2563eb"/>
+  <text x="1370" y="385" fill="#888" font-size="11" font-family="sans-serif" dominant-baseline="middle">0.24</text>
+  <text x="1040" y="415" fill="#ccc" font-size="12" font-family="sans-serif" dominant-baseline="middle">Job satisfaction</text>
+  <rect x="1180" y="405" width="180" height="8" rx="4" fill="#1a1a1a"/>
+  <rect x="1180" y="405" width="120" height="8" rx="4" fill="#2563eb"/>
+  <text x="1370" y="415" fill="#888" font-size="11" font-family="sans-serif" dominant-baseline="middle">0.19</text>
+  <text x="1040" y="445" fill="#ccc" font-size="12" font-family="sans-serif" dominant-baseline="middle">Promotion frequency</text>
+  <rect x="1180" y="435" width="180" height="8" rx="4" fill="#1a1a1a"/>
+  <rect x="1180" y="435" width="90" height="8" rx="4" fill="#2563eb"/>
+  <text x="1370" y="445" fill="#888" font-size="11" font-family="sans-serif" dominant-baseline="middle">0.15</text>
+  <text x="1040" y="475" fill="#ccc" font-size="12" font-family="sans-serif" dominant-baseline="middle">Monthly income</text>
+  <rect x="1180" y="465" width="180" height="8" rx="4" fill="#1a1a1a"/>
+  <rect x="1180" y="465" width="65" height="8" rx="4" fill="#2563eb"/>
+  <text x="1370" y="475" fill="#888" font-size="11" font-family="sans-serif" dominant-baseline="middle">0.10</text>
+  <!-- Bottom bar -->
+  <rect y="890" width="1600" height="10" fill="#0a0a0a"/>
+</svg>

@@ -1,0 +1,64 @@
+<svg viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#0a0a0a"/>
+  <!-- Browser chrome -->
+  <rect width="1600" height="48" fill="#141414"/>
+  <line x1="0" y1="48" x2="1600" y2="48" stroke="#222" stroke-width="1"/>
+  <circle cx="28" cy="24" r="6" fill="#ff5f56"/>
+  <circle cx="50" cy="24" r="6" fill="#ffbd2e"/>
+  <circle cx="72" cy="24" r="6" fill="#27c93f"/>
+  <rect x="200" y="14" width="360" height="20" rx="10" fill="#222"/>
+  <text x="380" y="29" fill="#666" font-size="11" font-family="monospace" text-anchor="middle" dominant-baseline="middle">upj-marketplace.app</text>
+  <!-- Navbar -->
+  <rect y="48" width="1600" height="64" fill="#111"/>
+  <text x="80" y="82" fill="#2563eb" font-size="22" font-weight="bold" font-family="sans-serif" dominant-baseline="middle">UPJ Marketplace</text>
+  <text x="1350" y="82" fill="#888" font-size="14" font-family="sans-serif" dominant-baseline="middle">Home</text>
+  <text x="1420" y="82" fill="#888" font-size="14" font-family="sans-serif" dominant-baseline="middle">Products</text>
+  <text x="1500" y="82" fill="#888" font-size="14" font-family="sans-serif" dominant-baseline="middle">Cart</text>
+  <!-- Hero banner -->
+  <rect y="112" width="1600" height="220" fill="url(#marketplaceHero)"/>
+  <defs>
+    <linearGradient id="marketplaceHero" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="50%" stop-color="#065f46"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1917"/>
+      <stop offset="100%" stop-color="#0c0a09"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#172554"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <text x="800" y="180" fill="#fff" font-size="32" font-weight="bold" font-family="sans-serif" text-anchor="middle" dominant-baseline="middle">Campus Marketplace</text>
+  <text x="800" y="220" fill="#aaa" font-size="16" font-family="sans-serif" text-anchor="middle" dominant-baseline="middle">Find and sell items within the university community</text>
+  <rect x="700" y="260" width="200" height="40" rx="20" fill="#2563eb"/>
+  <text x="800" y="282" fill="#fff" font-size="14" font-weight="600" font-family="sans-serif" text-anchor="middle" dominant-baseline="middle">Browse Products</text>
+  <!-- Product grid -->
+  <rect x="60" y="370" width="460" height="290" rx="10" fill="#141414" stroke="#222" stroke-width="1"/>
+  <rect x="80" y="390" width="420" height="170" rx="8" fill="url(#card1)"/>
+  <rect x="80" y="390" width="420" height="170" rx="8" fill="rgba(255,255,255,0.03)"/>
+  <text x="300" y="470" fill="#555" font-size="36" font-family="sans-serif" text-anchor="middle" dominant-baseline="middle">📘</text>
+  <text x="100" y="590" fill="#eee" font-size="16" font-weight="600" font-family="sans-serif">Data Structures Textbook</text>
+  <text x="100" y="618" fill="#2563eb" font-size="15" font-weight="bold" font-family="sans-serif">Rp 85.000</text>
+  <text x="460" y="618" fill="#666" font-size="12" font-family="sans-serif" text-anchor="end">Tangerang Selatan</text>
+  <rect x="570" y="370" width="460" height="290" rx="10" fill="#141414" stroke="#222" stroke-width="1"/>
+  <rect x="590" y="390" width="420" height="170" rx="8" fill="url(#card2)"/>
+  <text x="800" y="470" fill="#555" font-size="36" font-family="sans-serif" text-anchor="middle" dominant-baseline="middle">💻</text>
+  <text x="610" y="590" fill="#eee" font-size="16" font-weight="600" font-family="sans-serif">Mechanical Keyboard</text>
+  <text x="610" y="618" fill="#2563eb" font-size="15" font-weight="bold" font-family="sans-serif">Rp 450.000</text>
+  <text x="970" y="618" fill="#666" font-size="12" font-family="sans-serif" text-anchor="end">Jakarta Selatan</text>
+  <rect x="1080" y="370" width="460" height="290" rx="10" fill="#141414" stroke="#222" stroke-width="1"/>
+  <rect x="1100" y="390" width="420" height="170" rx="8" fill="url(#card3)"/>
+  <text x="1310" y="470" fill="#555" font-size="36" font-family="sans-serif" text-anchor="middle" dominant-baseline="middle">🎧</text>
+  <text x="1120" y="590" fill="#eee" font-size="16" font-weight="600" font-family="sans-serif">Wireless Headphones</text>
+  <text x="1120" y="618" fill="#2563eb" font-size="15" font-weight="bold" font-family="sans-serif">Rp 320.000</text>
+  <text x="1480" y="618" fill="#666" font-size="12" font-family="sans-serif" text-anchor="end">Depok</text>
+  <!-- Bottom bar -->
+  <rect y="890" width="1600" height="10" fill="#0a0a0a"/>
+</svg>
