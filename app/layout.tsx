@@ -6,7 +6,6 @@ import { AnimatedGrid } from "@/components/effects/animated-grid";
 import { CursorGlow } from "@/components/effects/cursor-glow";
 import { FloatingParticles } from "@/components/effects/floating-particles";
 import { CommandPalette } from "@/components/effects/command-palette";
-import { DockNavigation } from "@/components/effects/dock-navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
@@ -77,7 +76,6 @@ export default function RootLayout({
           <FloatingParticles />
           <CursorGlow />
           <CommandPalette />
-          <DockNavigation />
           {children}
         </ThemeProvider>
       </body>
