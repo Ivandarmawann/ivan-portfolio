@@ -3,6 +3,7 @@
 import { ArrowDown, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import * as React from "react";
+import { MagneticButton } from "@/components/effects/magnetic-button";
 
 export function HeroSection() {
   return (
@@ -69,20 +70,18 @@ export function HeroSection() {
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
-          <a
-            href="#projects"
-            className="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            View Projects
-            <ArrowDown aria-hidden="true" className="size-4" />
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex h-11 items-center gap-2 rounded-lg border border-border bg-secondary px-6 text-sm font-medium text-foreground transition-all hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <Mail aria-hidden="true" className="size-4" />
-            Contact Me
-          </a>
+          <MagneticButton as="a" href="#projects">
+            <div className="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              View Projects
+              <ArrowDown aria-hidden="true" className="size-4" />
+            </div>
+          </MagneticButton>
+          <MagneticButton as="a" href="#contact">
+            <div className="inline-flex h-11 items-center gap-2 rounded-lg border border-border bg-secondary px-6 text-sm font-medium text-foreground transition-all hover:bg-muted hover:border-primary/30 hover:shadow-[0_0_20px_rgba(37,99,235,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <Mail aria-hidden="true" className="size-4" />
+              Contact Me
+            </div>
+          </MagneticButton>
         </motion.div>
 
         <motion.div
@@ -97,9 +96,10 @@ export function HeroSection() {
             { value: "UPJ", label: "Informatics" },
             { value: "IDN", label: "Tangerang Selatan" },
           ].map((stat) => (
-            <div
+            <motion.div
               key={stat.label}
-              className="rounded-xl border border-border bg-card p-4 text-center transition-all hover:border-primary/20 sm:p-5"
+              whileHover={{ scale: 1.03, y: -2 }}
+              className="rounded-xl border border-border bg-card p-4 text-center transition-colors hover:border-primary/20 sm:p-5"
             >
               <p className="text-xl font-bold tracking-tight text-foreground sm:text-2xl lg:text-3xl">
                 {stat.value}
@@ -107,7 +107,7 @@ export function HeroSection() {
               <p className="mt-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground sm:text-xs">
                 {stat.label}
               </p>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

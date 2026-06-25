@@ -34,17 +34,8 @@ const contactMethods = [
   { platform: "Instagram", icon: InstagramIcon, label: "@ivandrmawn", href: "https://instagram.com/ivandrmawn", action: "Open" },
 ];
 
-const focusItems = [
-  "Full-stack Development",
-  "Data Analytics",
-  "Machine Learning",
-];
-
-const availableItems = [
-  "Internship",
-  "Freelance",
-  "Collaboration",
-];
+const focusItems = ["Full-stack Development", "Data Analytics", "Machine Learning"];
+const availableItems = ["Internship", "Freelance", "Collaboration"];
 
 export function ContactSection() {
   const [copiedEmail, setCopiedEmail] = React.useState(false);
@@ -99,10 +90,12 @@ export function ContactSection() {
 
             if (isEmail) {
               return (
-                <a
+                <motion.a
                   key={method.platform}
                   href={method.href}
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-primary/20 bg-primary/[0.04] p-4 transition-all hover:bg-primary/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-5"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group flex items-center justify-between gap-3 rounded-xl border border-primary/20 bg-primary/[0.04] p-4 transition-colors hover:bg-primary/[0.08] hover:shadow-[0_0_20px_rgba(37,99,235,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-5"
                 >
                   <span className="flex items-center gap-3 min-w-0">
                     <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/[0.06] text-primary">
@@ -121,7 +114,7 @@ export function ContactSection() {
                     type="button"
                     onClick={handleCopyEmail}
                     className={cn(
-                      "inline-flex size-9 shrink-0 items-center justify-center rounded-lg border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                      "inline-flex size-9 shrink-0 items-center justify-center rounded-lg border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                       copiedEmail
                         ? "border-green-500/30 bg-green-500/10 text-green-400"
                         : "border-border bg-secondary text-muted-foreground hover:text-foreground",
@@ -134,17 +127,19 @@ export function ContactSection() {
                       <Copy aria-hidden="true" className="size-4" />
                     )}
                   </button>
-                </a>
+                </motion.a>
               );
             }
 
             return (
-              <a
+              <motion.a
                 key={method.platform}
                 href={method.href}
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noreferrer" : undefined}
-                className="group flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/30 hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-5"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="group flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/30 hover:bg-secondary hover:shadow-[0_0_20px_rgba(37,99,235,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-5"
               >
                 <span className="flex items-center gap-3 min-w-0">
                   <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-secondary text-muted-foreground">
@@ -162,7 +157,7 @@ export function ContactSection() {
                 <span className="shrink-0 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground group-hover:text-foreground">
                   {method.action}
                 </span>
-              </a>
+              </motion.a>
             );
           })}
         </motion.div>
@@ -174,7 +169,10 @@ export function ContactSection() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mx-auto mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5 sm:mt-14"
         >
-          <div className="rounded-xl border border-border bg-card p-5 sm:p-6">
+          <motion.div
+            whileHover={{ y: -2 }}
+            className="rounded-xl border border-border bg-card p-5 transition-shadow hover:shadow-[0_0_20px_rgba(37,99,235,0.06)] sm:p-6"
+          >
             <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-primary">
               Current Focus
             </h3>
@@ -188,8 +186,11 @@ export function ContactSection() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="rounded-xl border border-border bg-card p-5 sm:p-6">
+          </motion.div>
+          <motion.div
+            whileHover={{ y: -2 }}
+            className="rounded-xl border border-border bg-card p-5 transition-shadow hover:shadow-[0_0_20px_rgba(37,99,235,0.06)] sm:p-6"
+          >
             <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-primary">
               Available For
             </h3>
@@ -203,7 +204,7 @@ export function ContactSection() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </motion.div>
 
         <motion.div

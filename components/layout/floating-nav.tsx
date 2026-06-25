@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
@@ -85,19 +86,29 @@ export function FloatingNav({ items = defaultNavItems, className }: FloatingNavP
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "relative flex h-8 items-center rounded-full px-3 text-sm font-medium text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-4",
+                    "relative flex h-8 items-center rounded-full px-3 text-sm font-medium transition-colors sm:px-4",
                     "hover:text-foreground",
-                    isActive && "text-foreground",
+                    isActive ? "text-foreground" : "text-muted-foreground",
                   )}
                 >
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute inset-0 -z-10 rounded-full transition-colors",
-                      isActive ? "bg-secondary" : "bg-transparent",
-                    )}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="absolute inset-0 -z-10 rounded-full bg-secondary"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative">{item.label}</span>
+                  <motion.span
+                    className="absolute -bottom-[2px] left-1/2 h-[2px] rounded-full bg-primary"
+                    initial={false}
+                    animate={{
+                      width: isActive ? "60%" : "0%",
+                      x: "-50%",
+                      opacity: isActive ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
                   />
-                  {item.label}
                 </a>
               </li>
             );
