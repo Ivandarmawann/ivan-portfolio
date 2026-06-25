@@ -18,8 +18,6 @@ const TechnicalCredibility = dynamic(() => import("@/components/sleep/TechnicalC
 const Applications = dynamic(() => import("@/components/sleep/Applications"), { ssr: false });
 const TechStack = dynamic(() => import("@/components/sleep/TechStack"), { ssr: false });
 const Achievements = dynamic(() => import("@/components/sleep/Achievements"), { ssr: false });
-const Demo = dynamic(() => import("@/components/sleep/Demo"), { ssr: false });
-const Gallery = dynamic(() => import("@/components/sleep/Gallery"), { ssr: false });
 const Timeline = dynamic(() => import("@/components/sleep/Timeline"), { ssr: false });
 const Footer = dynamic(() => import("@/components/sleep/Footer"), { ssr: false });
 const SectionDivider = dynamic(() => import("@/components/sleep/SectionDivider"), { ssr: false });
@@ -56,10 +54,6 @@ export default function SleepStageCaseStudy() {
         <TechStack />
         <SectionDivider />
         <Achievements />
-        <SectionDivider />
-        <Demo />
-        <SectionDivider />
-        <Gallery />
         <SectionDivider />
         <Timeline />
         <SectionDivider />

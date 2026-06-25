@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { Trophy, Layers, Clock, Shield, Database, BarChart3 } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
 import ScrollReveal from "./ScrollReveal";
@@ -16,25 +15,16 @@ const stats = [
 ];
 
 export default function Results() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const mouseRef = useRef<HTMLDivElement>(null);
-
   return (
     <section className="section-padding relative overflow-hidden">
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div
-          ref={mouseRef}
-          className="w-[700px] h-[700px] rounded-full bg-[#7C5CFF]/[0.06] blur-[150px] transition-transform duration-1000 ease-out"
-        />
-      </div>
-      <div className="section-container" ref={ref}>
+      <div className="section-container">
         <ScrollReveal>
           <div className="text-center max-w-4xl mx-auto mb-16">
             <motion.div
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#22D3EE]/10 border border-[#22D3EE]/20 mb-6"
               initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
               <Trophy className="w-3.5 h-3.5 text-[#22D3EE]" />
@@ -45,7 +35,8 @@ export default function Results() {
             <motion.div
               className="mb-4"
               initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <span className="text-7xl sm:text-8xl md:text-9xl font-bold text-gradient">
@@ -57,7 +48,8 @@ export default function Results() {
             <motion.div
               className="text-xl sm:text-2xl font-semibold text-white mb-4"
               initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
               Test Accuracy
@@ -66,7 +58,8 @@ export default function Results() {
             <motion.p
               className="text-[#888] text-lg leading-relaxed max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.7, duration: 0.5 }}
             >
               The LSTM model successfully captured long-term temporal dependencies

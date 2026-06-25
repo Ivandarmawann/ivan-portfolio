@@ -68,20 +68,15 @@ export default function Metrics() {
           {metrics.map((metric, i) => (
             <motion.div
               key={metric.label}
-              className="group glass rounded-2xl p-6 relative overflow-hidden"
+              className="glass rounded-2xl p-6 relative overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -6, transition: { duration: 0.2 } }}
             >
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: `radial-gradient(400px circle at 50% 0%, ${metric.color}10, transparent)` }}
-              />
               <div className="relative z-10 text-center">
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3 transition-all duration-300 group-hover:scale-110 group-hover:rotate-[-5deg]"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3"
                   style={{ backgroundColor: `${metric.color}15` }}
                 >
                   <metric.icon className="w-5 h-5" style={{ color: metric.color }} />
@@ -97,11 +92,6 @@ export default function Metrics() {
                   <TrendingUp className="w-3 h-3" style={{ color: metric.color }} />
                   <span>{metric.trend}</span>
                 </div>
-
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: `linear-gradient(90deg, transparent, ${metric.color}, transparent)`, boxShadow: `0 0 10px ${metric.color}` }}
-                />
               </div>
             </motion.div>
           ))}

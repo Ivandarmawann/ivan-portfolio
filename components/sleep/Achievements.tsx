@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { BarChart3, Waves, Hash, Layers, Brain, Heart } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
 import ScrollReveal from "./ScrollReveal";
@@ -62,24 +61,6 @@ const achievements = [
   },
 ];
 
-const stagger = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08 },
-  },
-};
-
-const childVariant = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" as const },
-  },
-};
-
 export default function Achievements() {
   return (
     <section className="section-padding relative">
@@ -97,33 +78,25 @@ export default function Achievements() {
           </div>
         </ScrollReveal>
 
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-        >
-          {achievements.map((a) => (
-            <motion.div
-              key={a.label}
-              variants={childVariant}
-              className="glass rounded-2xl p-6 glow-card text-center"
-            >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4"
-                style={{ backgroundColor: `${a.color}15` }}
-              >
-                <a.icon className="w-5 h-5" style={{ color: a.color }} />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {achievements.map((a, i) => (
+            <ScrollReveal key={a.label} delay={0.04 * i}>
+              <div className="glass rounded-2xl p-6 glow-card text-center">
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4"
+                  style={{ backgroundColor: `${a.color}15` }}
+                >
+                  <a.icon className="w-5 h-5" style={{ color: a.color }} />
+                </div>
+                <div className="text-2xl sm:text-3xl font-bold mb-1" style={{ color: a.color }}>
+                  <AnimatedCounter to={a.value} suffix={a.suffix} decimals={a.decimals} />
+                </div>
+                <div className="text-sm font-medium text-white">{a.label}</div>
+                <div className="text-xs text-[#555]">{a.sub}</div>
               </div>
-              <div className="text-2xl sm:text-3xl font-bold mb-1" style={{ color: a.color }}>
-                <AnimatedCounter to={a.value} suffix={a.suffix} decimals={a.decimals} />
-              </div>
-              <div className="text-sm font-medium text-white">{a.label}</div>
-              <div className="text-xs text-[#555]">{a.sub}</div>
-            </motion.div>
+            </ScrollReveal>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

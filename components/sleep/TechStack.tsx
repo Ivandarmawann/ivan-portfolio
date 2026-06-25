@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Code2 } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
@@ -33,54 +32,30 @@ export default function TechStack() {
       <div className="section-container">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <motion.div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#22D3EE]/10 border border-[#22D3EE]/20 mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-            >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#22D3EE]/10 border border-[#22D3EE]/20 mb-6">
               <Code2 className="w-3.5 h-3.5 text-[#22D3EE]" />
               <span className="text-xs text-[#22D3EE] font-medium tracking-wider uppercase">Technology</span>
-            </motion.div>
+            </div>
             <span className="text-[11px] text-[#555] font-mono tracking-[0.2em] uppercase mb-2 block">Tools & Frameworks</span>
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Technology <span className="text-gradient">Stack</span></h2>
             <p className="text-[#888] max-w-2xl mx-auto">Built with industry-standard tools for deep learning research and development.</p>
           </div>
         </ScrollReveal>
 
-        <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-
-          <div className="flex overflow-hidden group">
-            <motion.div
-              className="flex gap-5 min-w-max py-4"
-              animate={{ x: [0, -1920] }}
-              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-              style={{ willChange: "transform" }}
+        <div className="flex flex-wrap justify-center gap-3">
+          {techs.map((tech) => (
+            <div
+              key={tech.name}
+              className="flex items-center gap-3 px-5 py-3 rounded-2xl hover:scale-105 transition-all duration-300"
+              style={{ backgroundColor: tech.bgColor, border: `1px solid ${tech.color}15` }}
             >
-              {[...techs, ...techs, ...techs].map((tech, i) => (
-                <motion.div
-                  key={`${tech.name}-${i}`}
-                  className="group/card flex items-center gap-3 px-5 py-3 rounded-2xl border transition-all duration-300 cursor-pointer"
-                  style={{ backgroundColor: `${tech.bgColor}`, borderColor: `${tech.color}15` }}
-                  whileHover={{
-                    scale: 1.1,
-                    y: -4,
-                    borderColor: `${tech.color}40`,
-                    boxShadow: `0 0 30px ${tech.color}20`,
-                    rotate: -2,
-                    transition: { duration: 0.2 },
-                  }}
-                >
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center"
-                    dangerouslySetInnerHTML={{ __html: tech.svg }}
-                  />
-                  <span className="text-sm font-medium text-white/80 group-hover/card:text-white transition-colors">{tech.name}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center"
+                dangerouslySetInnerHTML={{ __html: tech.svg }}
+              />
+              <span className="text-sm font-medium text-white/80">{tech.name}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

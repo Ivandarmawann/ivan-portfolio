@@ -44,7 +44,7 @@ const dashboardStats = [
 
 function ClassDistributionChart() {
   const ref = useRef<HTMLDivElement>(null);
-  useInView(ref, { once: true, margin: "-40px" });
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
 
   return (
     <div ref={ref} className="glass rounded-3xl p-6 md:p-8">
@@ -146,7 +146,6 @@ export default function Dataset() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 + i * 0.04 }}
-                    whileHover={{ y: -2 }}
                   >
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${sensor.color}15` }}>
                       <sensor.icon className="w-4 h-4" style={{ color: sensor.color }} />
@@ -182,7 +181,6 @@ export default function Dataset() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 + i * 0.04 }}
-                    whileHover={{ y: -2 }}
                   >
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center mx-auto mb-2" style={{ backgroundColor: `${stage.color}15` }}>
                       <Icon className="w-4 h-4" style={{ color: stage.color }} />

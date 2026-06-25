@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GitBranch, Globe, Mail, ArrowUp, Brain, Clock, Database, Cpu } from "lucide-react";
+import { GitBranch, Globe, Mail, ArrowUp, Brain, Heart, Clock, Database, Cpu } from "lucide-react";
 
 const links = [
   { icon: GitBranch, href: "#", label: "GitHub Repository" },
@@ -75,16 +75,14 @@ export default function Footer() {
             <div className="text-xs text-[#555] font-mono uppercase tracking-wider mb-4">Connect</div>
             <div className="flex items-center gap-3 mb-4">
               {links.map((link) => (
-                <motion.a
+                <a
                   key={link.label}
                   href={link.href}
                   className="w-10 h-10 rounded-full bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-[#666] hover:text-white hover:border-[#7C5CFF]/50 transition-all duration-300"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
                   aria-label={link.label}
                 >
                   <link.icon className="w-4 h-4" />
-                </motion.a>
+                </a>
               ))}
             </div>
             <span className="text-[10px] text-[#555]">Thank you for viewing</span>
@@ -101,8 +99,6 @@ export default function Footer() {
           <motion.button
             onClick={scrollToTop}
             className="w-10 h-10 rounded-full bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-white hover:border-[#7C5CFF]/50 transition-all duration-300"
-            whileHover={{ scale: 1.1, y: -2 }}
-            whileTap={{ scale: 0.95 }}
             aria-label="Back to top"
           >
             <ArrowUp className="w-4 h-4" />

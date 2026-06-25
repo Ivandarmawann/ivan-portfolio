@@ -97,20 +97,19 @@ export default function ConfusionMatrix() {
                         const g = Math.round(92 - intensity * 40);
                         const b = Math.round(255);
                         return (
-                          <motion.button
+                          <button
                             key={`${i}-${j}`}
-                            className="relative rounded-lg py-2 text-center text-[10px] font-medium transition-all duration-200 cursor-pointer"
+                            className="relative rounded-lg py-2 text-center text-[10px] font-medium transition-all duration-200 cursor-pointer hover:scale-[1.08]"
                             style={{
                               backgroundColor: `rgb(${r}, ${g}, ${b})`,
                               opacity,
                             }}
-                            whileHover={{ scale: 1.08, zIndex: 10 }}
                             onClick={() =>
                               setSelected(selected === stages[i] ? null : stages[i])
                             }
                           >
                             {val.toFixed(1)}%
-                          </motion.button>
+                          </button>
                         );
                       })}
                     </div>
@@ -139,7 +138,6 @@ export default function ConfusionMatrix() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 + i * 0.1 }}
-                    whileHover={{ x: 4 }}
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <div

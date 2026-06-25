@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Search, BookOpen, Database, Cpu, BarChart3, Rocket, Circle, Info } from "lucide-react";
+import { motion } from "framer-motion";
+import { Search, BookOpen, Database, Cpu, BarChart3, Rocket, Circle } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 const milestones = [
@@ -15,8 +14,6 @@ const milestones = [
 ];
 
 export default function Timeline() {
-  const [hovered, setHovered] = useState<number | null>(null);
-
   return (
     <section id="research" className="section-padding relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#22D3EE]/[0.02] to-transparent pointer-events-none" />
@@ -39,7 +36,7 @@ export default function Timeline() {
         <div className="relative max-w-3xl mx-auto">
           <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#7C5CFF]/30 via-[#22D3EE]/20 to-transparent" />
           {milestones.map((m, i) => (
-            <MilestoneNode key={m.title} milestone={m} index={i} isHovered={hovered === i} onHover={() => setHovered(i)} onLeave={() => setHovered(null)} />
+            <MilestoneNode key={m.title} milestone={m} index={i} />
           ))}
         </div>
       </div>
@@ -47,19 +44,12 @@ export default function Timeline() {
   );
 }
 
-function MilestoneNode({ milestone, index, isHovered, onHover, onLeave }: {
+function MilestoneNode({ milestone, index }: {
   milestone: (typeof milestones)[0];
   index: number;
-  isHovered: boolean;
-  onHover: () => void;
-  onLeave: () => void;
 }) {
   return (
-    <div
-      className="relative pl-16 pb-12 last:pb-0"
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
-    >
+    <div className="relative pl-16 pb-12 last:pb-0">
       <motion.div
         className="absolute left-4 top-1"
         initial={{ scale: 0 }}
@@ -68,35 +58,24 @@ function MilestoneNode({ milestone, index, isHovered, onHover, onLeave }: {
         transition={{ delay: index * 0.12, duration: 0.4, type: "spring" }}
       >
         <div
-          className="w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300"
-          style={{
-            backgroundColor: isHovered ? `${milestone.color}30` : `${milestone.color}20`,
-            boxShadow: isHovered ? `0 0 20px ${milestone.color}40` : "none",
-          }}
+          className="w-5 h-5 rounded-full flex items-center justify-center"
+          style={{ backgroundColor: `${milestone.color}20` }}
         >
           <Circle className="w-2 h-2" style={{ color: milestone.color, fill: milestone.color }} />
         </div>
       </motion.div>
 
       <motion.div
-        className="glass rounded-2xl p-6 border border-[#2A2A2A] transition-all duration-300"
-        style={{
-          borderColor: isHovered ? `${milestone.color}40` : "#2A2A2A",
-          boxShadow: isHovered ? `0 0 30px ${milestone.color}10` : "none",
-        }}
+        className="glass rounded-2xl p-6 border border-[#2A2A2A]"
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ delay: index * 0.12, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        whileHover={{ x: 4 }}
       >
         <div className="flex items-start gap-4">
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300"
-            style={{
-              backgroundColor: `${milestone.color}15`,
-              boxShadow: isHovered ? `0 0 20px ${milestone.color}20` : "none",
-            }}
+            className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+            style={{ backgroundColor: `${milestone.color}15` }}
           >
             <milestone.icon className="w-5 h-5" style={{ color: milestone.color }} />
           </div>
@@ -109,23 +88,6 @@ function MilestoneNode({ milestone, index, isHovered, onHover, onLeave }: {
             </div>
             <h3 className="text-lg font-semibold text-white mb-1">{milestone.title}</h3>
             <p className="text-sm text-[#666] leading-relaxed">{milestone.description}</p>
-
-            <AnimatePresence>
-              {isHovered && (
-                <motion.div
-                  className="mt-3 p-3 rounded-xl bg-[#1A1A1A] border border-[#2A2A2A]"
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="flex items-start gap-2">
-                    <Info className="w-3 h-3 text-[#555] mt-0.5 shrink-0" />
-                    <p className="text-xs text-[#888] leading-relaxed">{milestone.details}</p>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
         </div>
       </motion.div>

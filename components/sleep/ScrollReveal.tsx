@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import { motion, useInView } from "framer-motion";
+import { useMediaQuery } from "./useMediaQuery";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -21,8 +22,8 @@ export default function ScrollReveal({
   className = "",
   delay = 0,
   direction = "up",
-  duration = 0.7,
-  distance = 40,
+  duration = 0.4,
+  distance = 20,
   once = true,
   blur = false,
   stagger = false,
@@ -30,24 +31,25 @@ export default function ScrollReveal({
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-80px" });
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const effectiveDistance = isMobile ? Math.min(distance, 20) : distance;
+  const effectiveDuration = isMobile ? Math.min(duration, 0.4) : duration;
+  const effectiveDelay = isMobile ? Math.min(delay, 0.15) : delay;
 
   const getInitial = () => {
-    const base: Record<string, string | number> = {
-      opacity: 0,
-    };
-    if (blur) base.filter = "blur(8px)";
-    if (direction === "up") base.y = distance;
-    if (direction === "down") base.y = -distance;
-    if (direction === "left") base.x = distance;
-    if (direction === "right") base.x = -distance;
+    const base: Record<string, string | number> = { opacity: 0 };
+    if (blur && !isMobile) base.filter = "blur(8px)";
+    if (direction === "up") base.y = effectiveDistance;
+    if (direction === "down") base.y = -effectiveDistance;
+    if (direction === "left") base.x = effectiveDistance;
+    if (direction === "right") base.x = -effectiveDistance;
     return base;
   };
 
   const getAnimate = () => {
-    const base: Record<string, string | number> = {
-      opacity: 1,
-    };
-    if (blur) base.filter = "blur(0px)";
+    const base: Record<string, string | number> = { opacity: 1 };
+    if (blur && !isMobile) base.filter = "blur(0px)";
     if (direction !== "none") base.y = 0;
     if (direction !== "none") base.x = 0;
     return base;
@@ -59,12 +61,12 @@ export default function ScrollReveal({
         <motion.div
           initial={getInitial()}
           animate={isInView ? getAnimate() : getInitial()}
-          transition={{ duration, delay, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: effectiveDuration, delay: effectiveDelay, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.div
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: staggerDelay } },
+              visible: { transition: { staggerChildren: isMobile ? 0.05 : staggerDelay } },
             }}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -81,7 +83,7 @@ export default function ScrollReveal({
       <motion.div
         initial={getInitial()}
         animate={isInView ? getAnimate() : getInitial()}
-        transition={{ duration, delay, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: effectiveDuration, delay: effectiveDelay, ease: [0.16, 1, 0.3, 1] }}
       >
         {children}
       </motion.div>

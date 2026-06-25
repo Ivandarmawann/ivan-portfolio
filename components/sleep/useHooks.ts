@@ -1,22 +1,30 @@
 "use client";
 
-import { useState, useEffect, type RefObject } from "react";
+import { useState, useEffect, useRef, type RefObject } from "react";
+import { useMediaQuery } from "./useMediaQuery";
 
 export function useMousePosition() {
   const [pos, setPos] = useState({ x: 0.5, y: 0.5 });
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   useEffect(() => {
+    if (isMobile) return;
     const handle = (e: MouseEvent) => {
       setPos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
     };
     window.addEventListener("mousemove", handle);
     return () => window.removeEventListener("mousemove", handle);
-  }, []);
+  }, [isMobile]);
+
   return pos;
 }
 
 export function useTilt(ref: RefObject<HTMLElement | null>, sensitivity = 10) {
   const [style, setStyle] = useState({});
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   useEffect(() => {
+    if (isMobile) return;
     const el = ref.current;
     if (!el) return;
     const handle = (e: MouseEvent) => {
@@ -42,6 +50,7 @@ export function useTilt(ref: RefObject<HTMLElement | null>, sensitivity = 10) {
       el.removeEventListener("mousemove", handle);
       el.removeEventListener("mouseleave", leave);
     };
-  }, [ref, sensitivity]);
+  }, [ref, sensitivity, isMobile]);
+
   return style;
 }

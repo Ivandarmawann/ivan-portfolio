@@ -43,7 +43,7 @@ const chartDefaults = {
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: { name: string; value: number; color: string; dataKey: string }[]; label?: number }) {
   if (!active || !payload) return null;
   return (
-    <div className="glass rounded-xl p-3 border border-[#2A2A2A] shadow-xl">
+    <div className="glass rounded-xl p-3 border border-[#2A2A2A]">
       <div className="text-xs text-[#666] mb-1">Epoch {label}</div>
       {payload.map((p) => (
         <div key={p.name} className="flex items-center gap-2 text-xs">
@@ -84,8 +84,8 @@ function AccuracyChart() {
             <XAxis dataKey="epoch" stroke="#444" tick={{ fill: "#555", fontSize: 11 }} tickLine={false} axisLine={false} />
             <YAxis domain={[30, 100]} stroke="#444" tick={{ fill: "#555", fontSize: 11 }} tickLine={false} axisLine={false} tickFormatter={(v) => `${v}%`} />
             <Tooltip content={<CustomTooltip />} cursor={{ stroke: "#333", strokeWidth: 1 }} />
-            <Area type="monotone" dataKey="training" stroke="#7C5CFF" {...chartDefaults} fill="url(#accTrain)" animationDuration={1500} animationEasing="ease-out" />
-            <Area type="monotone" dataKey="validation" stroke="#22D3EE" {...chartDefaults} fill="url(#accVal)" animationDuration={1500} animationEasing="ease-out" animationBegin={300} />
+            <Area type="monotone" dataKey="training" stroke="#7C5CFF" {...chartDefaults} fill="url(#accTrain)" isAnimationActive={false} />
+            <Area type="monotone" dataKey="validation" stroke="#22D3EE" {...chartDefaults} fill="url(#accVal)" isAnimationActive={false} />
           </AreaChart>
         </ResponsiveContainer>
       </div>
@@ -131,8 +131,8 @@ function LossChart() {
             <XAxis dataKey="epoch" stroke="#444" tick={{ fill: "#555", fontSize: 11 }} tickLine={false} axisLine={false} />
             <YAxis domain={[0, 2]} stroke="#444" tick={{ fill: "#555", fontSize: 11 }} tickLine={false} axisLine={false} />
             <Tooltip content={<CustomTooltip />} cursor={{ stroke: "#333", strokeWidth: 1 }} />
-            <Area type="monotone" dataKey="training" stroke="#F472B6" {...chartDefaults} fill="url(#lossTrain)" animationDuration={1500} animationEasing="ease-out" />
-            <Area type="monotone" dataKey="validation" stroke="#34D399" {...chartDefaults} fill="url(#lossVal)" animationDuration={1500} animationEasing="ease-out" animationBegin={300} />
+            <Area type="monotone" dataKey="training" stroke="#F472B6" {...chartDefaults} fill="url(#lossTrain)" isAnimationActive={false} />
+            <Area type="monotone" dataKey="validation" stroke="#34D399" {...chartDefaults} fill="url(#lossVal)" isAnimationActive={false} />
           </AreaChart>
         </ResponsiveContainer>
       </div>

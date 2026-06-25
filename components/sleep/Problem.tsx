@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Building,
   Bed,
@@ -68,11 +67,8 @@ function StepNode({
   index: number;
   isLast: boolean;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
-
   return (
-    <div ref={ref} className="flex items-start gap-6">
+    <div className="flex items-start gap-6">
       <div className="flex flex-col items-center">
         <motion.div
           className={`w-14 h-14 rounded-2xl flex items-center justify-center ${
@@ -81,7 +77,8 @@ function StepNode({
               : "bg-[#1A1A1A] border border-[#2A2A2A]"
           }`}
           initial={{ scale: 0, opacity: 0 }}
-          animate={isInView ? { scale: 1, opacity: 1 } : {}}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ delay: index * 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           <step.icon
@@ -92,7 +89,8 @@ function StepNode({
           <motion.div
             className="w-px h-12 bg-gradient-to-b from-[#7C5CFF]/30 to-[#22D3EE]/10 my-2"
             initial={{ scaleY: 0 }}
-            animate={isInView ? { scaleY: 1 } : {}}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
             style={{ transformOrigin: "top" }}
           />
@@ -101,7 +99,8 @@ function StepNode({
       <motion.div
         className="flex-1 pb-8"
         initial={{ opacity: 0, x: -20 }}
-        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
         transition={{ delay: index * 0.15 + 0.1, duration: 0.5 }}
       >
         <div className="flex items-center gap-2 mb-1">

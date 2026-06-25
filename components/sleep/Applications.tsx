@@ -1,9 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Moon, Heart, Watch, Shield, Users, Smartphone, ArrowUpRight } from "lucide-react";
-import { useTilt } from "./useHooks";
+import { Moon, Heart, Watch, Shield, Users, Smartphone } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 const applications = [
@@ -16,41 +14,24 @@ const applications = [
 ];
 
 function TiltCard({ app, i }: { app: (typeof applications)[0]; i: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const tiltStyle = useTilt(ref, 8);
-
   return (
     <ScrollReveal delay={0.05 * i}>
       <motion.div
-        ref={ref}
-        className="group relative overflow-hidden rounded-3xl p-6 cursor-pointer"
+        className="relative overflow-hidden rounded-3xl p-6"
         style={{
           background: `linear-gradient(135deg, ${app.color}08, transparent)`,
           border: `1px solid ${app.color}20`,
-          ...tiltStyle,
         }}
-        whileHover={{ y: -4 }}
       >
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{ background: `radial-gradient(600px circle at 50% 0%, ${app.color}15, transparent)` }}
-        />
         <div className="relative z-10">
           <div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-[-5deg] transition-all duration-300"
+            className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4"
             style={{ backgroundColor: `${app.color}15` }}
           >
             <app.icon className="w-6 h-6" style={{ color: app.color }} />
           </div>
           <h3 className="text-lg font-semibold text-white mb-2">{app.title}</h3>
           <p className="text-sm text-[#666] leading-relaxed">{app.description}</p>
-          <div
-            className="mt-4 flex items-center gap-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{ color: app.color }}
-          >
-            <span>Learn more</span>
-            <ArrowUpRight className="w-3 h-3" />
-          </div>
         </div>
       </motion.div>
     </ScrollReveal>
