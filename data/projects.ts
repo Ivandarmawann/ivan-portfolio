@@ -108,7 +108,13 @@ export const projects: Project[] = [
       "Practiced neural network experimentation with TensorFlow and Keras.",
       "Explored a health-data problem where model reliability and interpretability are important.",
     ],
-    links: [],
+    links: [
+      {
+        label: "View Case Study",
+        href: "/projects/sleep-stage-prediction",
+        type: "case-study",
+      },
+    ],
   },
   {
     slug: "youtube-comment-topic-modeling-lda",

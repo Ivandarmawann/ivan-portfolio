@@ -19,4 +19,10 @@ export const socials: SocialLink[] = [
     href: "https://wa.me/6281585372171",
     primary: false,
   },
+  {
+    platform: "LinkedIn",
+    label: "linkedin.com/in/ivandarmawann",
+    href: "https://www.linkedin.com/in/ivandarmawann/",
+    primary: true,
+  },
 ];

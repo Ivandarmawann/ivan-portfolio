@@ -29,7 +29,7 @@ const quickLinks = [
 
 const socialLinks = [
   { label: "GitHub", href: "https://github.com/ivandarmawann", icon: Code2 },
-  { label: "LinkedIn", href: "https://linkedin.com/in/ivandrmawn", icon: ExternalLink },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/ivandarmawann/", icon: ExternalLink },
   { label: "X (Twitter)", href: "https://x.com/mivannnn", icon: XIcon },
   { label: "Instagram", href: "https://instagram.com/ivandrmawn", icon: InstagramIcon },
 ];

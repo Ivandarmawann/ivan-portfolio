@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ArrowRight, Code2, Lock } from "lucide-react";
+import { ArrowRight, BarChart3, Brain, Cloud, ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,32 +9,13 @@ import Link from "next/link";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
-import type { ProjectLink } from "@/types/portfolio";
+import type { Project } from "@/types/portfolio";
 
 const categoryLabels: Record<string, string> = {
   web: "Web Development",
   data: "Data Analytics",
   "machine-learning": "Machine Learning",
   "fullstack-web": "Full-Stack Web",
-};
-
-const showcaseStyles: Record<string, { gradient: string; badge: string }> = {
-  "machine-learning": {
-    gradient: "from-indigo-950/60 via-indigo-900/20 to-background",
-    badge: "border-indigo-500/20 bg-indigo-500/10 text-indigo-300",
-  },
-  "fullstack-web": {
-    gradient: "from-emerald-950/60 via-emerald-900/20 to-background",
-    badge: "border-emerald-500/20 bg-emerald-500/10 text-emerald-300",
-  },
-  data: {
-    gradient: "from-amber-950/60 via-amber-900/20 to-background",
-    badge: "border-amber-500/20 bg-amber-500/10 text-amber-300",
-  },
-  web: {
-    gradient: "from-violet-950/60 via-violet-900/20 to-background",
-    badge: "border-violet-500/20 bg-violet-500/10 text-violet-300",
-  },
 };
 
 const previewImages: Record<string, string> = {
@@ -44,8 +25,45 @@ const previewImages: Record<string, string> = {
   "sleep-stage-prediction-lstm": "/projects/sleep-stage-prediction-lstm/preview.svg",
 };
 
+const projectMetrics: Record<string, { value: string; label: string }[]> = {
+  "sleep-stage-prediction-lstm": [
+    { value: "90.16%", label: "Accuracy" },
+    { value: "200K+", label: "Samples" },
+  ],
+  "weather-detection-ai-yolov12": [
+    { value: "94.7%", label: "Accuracy" },
+    { value: "3", label: "Classes" },
+  ],
+  "upj-marketplace": [
+    { value: "7", label: "Features" },
+    { value: "Flask", label: "Backend" },
+  ],
+  "employee-turnover-prediction-xgboost": [
+    { value: "XGBoost", label: "Model" },
+    { value: "HR", label: "Domain" },
+  ],
+};
+
+const projectIcons: Record<string, React.ElementType> = {
+  "sleep-stage-prediction-lstm": Brain,
+  "weather-detection-ai-yolov12": Cloud,
+  "upj-marketplace": ShoppingCart,
+  "employee-turnover-prediction-xgboost": BarChart3,
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.08, ease: "easeOut" as const },
+  }),
+};
+
 export function ProjectsSection() {
   const featured = projects.filter((p) => p.featured);
+  const heroProject = featured.find((p) => p.slug === "sleep-stage-prediction-lstm");
+  const otherFeatured = featured.filter((p) => p.slug !== "sleep-stage-prediction-lstm");
   const nonFeatured = projects.filter((p) => !p.featured);
 
   return (
@@ -60,132 +78,39 @@ export function ProjectsSection() {
           <SectionHeading
             eyebrow="Projects"
             title="Featured work."
-            description="Four featured projects across machine learning, full-stack web, and data analytics."
+            description="Flagship projects across machine learning, full-stack web, and data analytics."
             align="center"
           />
         </motion.div>
       </div>
 
-      <div className="mx-auto mt-8 w-full max-w-6xl space-y-14 px-6 sm:mt-10 sm:space-y-18 sm:px-8 lg:space-y-20 lg:px-10">
-        {featured.map((project, index) => {
-          const caseStudyLink = project.links.find((l) => l.type === "case-study");
-          const style = showcaseStyles[project.category] ?? showcaseStyles["machine-learning"];
-          const previewImage = project.image ?? previewImages[project.slug];
+      <div className="mx-auto mt-10 w-full max-w-6xl space-y-12 px-6 sm:px-8 lg:px-10">
+        {heroProject ? (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            custom={0}
+            variants={cardVariants}
+          >
+            <ProjectHeroCard project={heroProject} />
+          </motion.div>
+        ) : null}
 
-          return (
-            <motion.article
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {otherFeatured.map((project, index) => (
+            <motion.div
               key={project.slug}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.06,
-                ease: "easeOut",
-              }}
+              custom={index + 1}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
             >
-              <Link
-                href={caseStudyLink?.href ?? "#"}
-                className={cn(
-                  "relative block aspect-[16/9] w-full overflow-hidden rounded-lg border border-border sm:rounded-xl",
-                  !caseStudyLink && "pointer-events-none",
-                )}
-              >
-                {previewImage ? (
-                  previewImage.endsWith(".svg") ? (
-                    <Image
-                      src={previewImage}
-                      alt={`${project.title} screenshot`}
-                      fill
-                      className="object-cover object-top"
-                      unoptimized
-                    />
-                  ) : (
-                    <>
-                      <Image
-                        src={previewImage}
-                        alt={`${project.title} screenshot`}
-                        fill
-                        className="object-cover object-top"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1100px"
-                        priority
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-                        <span
-                          className={cn(
-                            "inline-block rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-wider",
-                            style.badge,
-                          )}
-                        >
-                          {categoryLabels[project.category]}
-                        </span>
-                        <h3 className="mt-3 text-lg font-bold tracking-tight text-white sm:text-xl lg:text-2xl">
-                          {project.title}
-                        </h3>
-                      </div>
-                    </>
-                  )
-                ) : (
-                  <div
-                    className={cn(
-                      "flex h-full items-center justify-center bg-gradient-to-br",
-                      style.gradient,
-                    )}
-                  >
-                    <div className="px-8 text-center">
-                      <span
-                        className={cn(
-                          "inline-block rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-wider",
-                          style.badge,
-                        )}
-                      >
-                        {categoryLabels[project.category]}
-                      </span>
-                      <h3 className="mt-4 text-lg font-bold tracking-tight text-white sm:text-xl lg:text-2xl">
-                        {project.title}
-                      </h3>
-                    </div>
-                  </div>
-                )}
-              </Link>
-
-              <div className="mt-5 grid gap-4 sm:grid-cols-[1.2fr_1fr] sm:gap-8 lg:gap-10">
-                <div>
-                  <p className="text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
-                    {project.summary}
-                  </p>
-                </div>
-
-                <div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-md border border-border bg-card px-2.5 py-1 text-xs font-medium text-muted-foreground"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-4 flex flex-wrap items-center gap-3">
-                    {caseStudyLink && (
-                      <Link
-                        href={caseStudyLink.href}
-                        className="inline-flex h-9 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                      >
-                        View Case Study
-                        <ArrowRight aria-hidden="true" className="size-3.5" />
-                      </Link>
-                    )}
-                    <ProjectActions links={project.links} />
-                  </div>
-                </div>
-              </div>
-            </motion.article>
-          );
-        })}
+              <ProjectCard project={project} />
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {nonFeatured.length > 0 && (
@@ -196,7 +121,10 @@ export function ProjectsSection() {
           </h3>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             {nonFeatured.map((project, index) => {
-              const style = showcaseStyles[project.category] ?? showcaseStyles["machine-learning"];
+              const style = {
+                gradient: "from-indigo-950/60 via-indigo-900/20 to-background",
+                badge: "border-indigo-500/20 bg-indigo-500/10 text-indigo-300",
+              };
               return (
                 <motion.div
                   key={project.slug}
@@ -240,35 +168,182 @@ export function ProjectsSection() {
   );
 }
 
-function ProjectActions({
-  links,
-}: {
-  links: ProjectLink[];
-}) {
-  const repositoryLink = links.find((link) => link.type === "repository");
-
-  const buttonClass =
-    "inline-flex h-9 items-center justify-center gap-1.5 rounded-lg border border-border bg-secondary px-3.5 text-sm font-medium text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
-
-  if (!repositoryLink) {
-    return (
-      <button type="button" className={cn(buttonClass, "cursor-not-allowed opacity-55")} disabled>
-        <Lock aria-hidden="true" className="size-3.5" />
-        Source Code (Private)
-      </button>
-    );
-  }
+function ProjectHeroCard({ project }: { project: Project }) {
+  const caseStudyLink = project.links.find((l) => l.type === "case-study");
+  const previewImage = project.image ?? previewImages[project.slug];
+  const metrics = projectMetrics[project.slug] ?? [];
+  const Icon = projectIcons[project.slug] ?? Brain;
 
   return (
-    <a
-      href={repositoryLink.href}
-      target="_blank"
-      rel="noreferrer"
-      className={cn(buttonClass, "hover:bg-muted hover:text-foreground")}
-      aria-label="Source code on GitHub"
+    <Link
+      href={caseStudyLink?.href ?? "#"}
+      className={cn(
+        "group relative block overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-[0_0_40px_rgba(37,99,235,0.08)]",
+        !caseStudyLink && "pointer-events-none",
+      )}
     >
-      <Code2 aria-hidden="true" className="size-3.5" />
-      View Source
-    </a>
+      <div className="grid lg:grid-cols-[1.3fr_1fr]">
+        <div className="relative aspect-[16/10] overflow-hidden lg:aspect-auto">
+          {previewImage ? (
+            previewImage.endsWith(".svg") ? (
+              <Image
+                src={previewImage}
+                alt={`${project.title} screenshot`}
+                fill
+                className="object-cover object-top transition-all duration-700 group-hover:scale-[1.03]"
+                unoptimized
+              />
+            ) : (
+              <>
+                <Image
+                  src={previewImage}
+                  alt={`${project.title} screenshot`}
+                  fill
+                  className="object-cover object-top transition-all duration-700 group-hover:scale-[1.03]"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 650px"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
+              </>
+            )
+          ) : null}
+        </div>
+
+        <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex size-10 items-center justify-center rounded-xl border border-primary/20 bg-primary/[0.08] text-primary">
+              <Icon aria-hidden="true" className="size-5" />
+            </span>
+            <span className="rounded-full border border-primary/20 bg-primary/[0.06] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
+              Featured Project
+            </span>
+          </div>
+
+          <h3 className="mt-4 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+            {project.title}
+          </h3>
+
+          <p className="mt-3 line-clamp-2 text-sm leading-6 text-muted-foreground">
+            {project.summary}
+          </p>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.techStack.slice(0, 6).map((tech) => (
+              <span
+                key={tech}
+                className="rounded-md border border-border bg-secondary/80 px-2 py-0.5 text-[11px] font-medium text-muted-foreground transition-colors group-hover:border-primary/30 group-hover:text-primary"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {metrics.length > 0 ? (
+            <div className="mt-5 flex flex-wrap gap-4">
+              {metrics.map((m) => (
+                <div key={m.label} className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary/60" />
+                  <div>
+                    <span className="text-sm font-bold text-foreground">{m.value}</span>
+                    <span className="ml-1 text-xs text-muted-foreground">{m.label}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
+
+          <div className="mt-6 inline-flex h-10 w-fit items-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-all group-hover:bg-primary/90">
+            View Case Study
+            <ArrowRight aria-hidden="true" className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  const caseStudyLink = project.links.find((l) => l.type === "case-study");
+  const previewImage = project.image ?? previewImages[project.slug];
+  const metrics = projectMetrics[project.slug] ?? [];
+
+  return (
+    <div
+      className={cn(
+        "group relative overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-[0_0_30px_rgba(37,99,235,0.06)]",
+      )}
+    >
+      <Link href={caseStudyLink?.href ?? "#"} className={cn(!caseStudyLink && "pointer-events-none")}>
+        <div className="relative aspect-[16/10] overflow-hidden">
+          {previewImage ? (
+            previewImage.endsWith(".svg") ? (
+              <Image
+                src={previewImage}
+                alt={`${project.title} screenshot`}
+                fill
+                className="object-cover object-top transition-all duration-500 group-hover:scale-[1.04]"
+                unoptimized
+              />
+            ) : (
+              <>
+                <Image
+                  src={previewImage}
+                  alt={`${project.title} screenshot`}
+                  fill
+                  className="object-cover object-top transition-all duration-500 group-hover:scale-[1.04]"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              </>
+            )
+          ) : null}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-0 p-4">
+            <span className="rounded-full border border-white/20 bg-black/40 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-white backdrop-blur-sm">
+              {categoryLabels[project.category]}
+            </span>
+          </div>
+        </div>
+
+        <div className="p-5">
+          <h3 className="text-base font-bold text-foreground sm:text-lg">
+            {project.title}
+          </h3>
+          <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">
+            {project.summary}
+          </p>
+
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {project.techStack.slice(0, 4).map((tech) => (
+              <span
+                key={tech}
+                className="rounded-md border border-border bg-secondary/80 px-2 py-0.5 text-[11px] font-medium text-muted-foreground transition-colors group-hover:border-primary/30 group-hover:text-primary"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {metrics.length > 0 ? (
+            <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1">
+              {metrics.map((m) => (
+                <div key={m.label} className="flex items-center gap-1.5">
+                  <span className="h-1 w-1 rounded-full bg-primary/50" />
+                  <span className="text-xs font-semibold text-foreground">{m.value}</span>
+                  <span className="text-xs text-muted-foreground">{m.label}</span>
+                </div>
+              ))}
+            </div>
+          ) : null}
+
+          {caseStudyLink ? (
+            <div className="mt-5 inline-flex h-9 items-center gap-2 rounded-lg bg-primary px-4 text-xs font-semibold text-primary-foreground shadow-sm transition-all group-hover:bg-primary/90">
+              View Case Study
+              <ArrowRight aria-hidden="true" className="size-3" />
+            </div>
+          ) : null}
+        </div>
+      </Link>
+    </div>
   );
 }

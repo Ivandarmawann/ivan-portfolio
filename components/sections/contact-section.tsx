@@ -29,6 +29,7 @@ const contactMethods = [
   { platform: "Email", icon: Mail, label: "mhmmdipand@gmail.com", href: "mailto:mhmmdipand@gmail.com", action: "Copy" },
   { platform: "GitHub", icon: ExternalLink, label: "github.com/ivandarmawann", href: "https://github.com/ivandarmawann", action: "Open" },
   { platform: "WhatsApp", icon: Smartphone, label: "+62 815-8537-2171", href: "https://wa.me/6281585372171", action: "Chat" },
+  { platform: "LinkedIn", icon: ExternalLink, label: "linkedin.com/in/ivandarmawann", href: "https://www.linkedin.com/in/ivandarmawann/", action: "Open" },
   { platform: "X (Twitter)", icon: XIcon, label: "@mivannnn", href: "https://x.com/mivannnn", action: "Open" },
   { platform: "Instagram", icon: InstagramIcon, label: "@ivandrmawn", href: "https://instagram.com/ivandrmawn", action: "Open" },
 ];
