@@ -1,24 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useSpring, useTransform } from "framer-motion";
+import { motion, useSpring, useTransform, useReducedMotion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function CursorGlow() {
   const [mouse, setMouse] = useState({ x: -1000, y: -1000 });
+  const prefersReducedMotion = useReducedMotion();
+  const isMobile = useIsMobile();
+  const disabled = isMobile || prefersReducedMotion;
 
   useEffect(() => {
+    if (disabled) return;
     const onMove = (e: PointerEvent) => {
       setMouse({ x: e.clientX, y: e.clientY });
     };
     window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
-  }, []);
+  }, [disabled]);
 
-  const springX = useSpring(mouse.x, { stiffness: 80, damping: 25, mass: 0.8 });
-  const springY = useSpring(mouse.y, { stiffness: 80, damping: 25, mass: 0.8 });
-
+  const springX = useSpring(mouse.x, { stiffness: disabled ? 0 : 80, damping: 25, mass: 0.8 });
+  const springY = useSpring(mouse.y, { stiffness: disabled ? 0 : 80, damping: 25, mass: 0.8 });
   const x = useTransform(springX, (v) => v - 250);
   const y = useTransform(springY, (v) => v - 250);
+
+  if (disabled) return null;
 
   return (
     <motion.div

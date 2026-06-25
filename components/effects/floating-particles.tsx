@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useReducedMotion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Particle {
   x: number;
@@ -15,8 +17,12 @@ export function FloatingParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const particlesRef = useRef<Particle[]>([]);
+  const prefersReducedMotion = Boolean(useReducedMotion());
+  const isMobile = useIsMobile();
+  const disabled = isMobile || prefersReducedMotion;
 
   useEffect(() => {
+    if (disabled) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -34,7 +40,7 @@ export function FloatingParticles() {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    const count = 30;
+    const count = isMobile ? 8 : 30;
     particlesRef.current = Array.from({ length: count }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -49,13 +55,15 @@ export function FloatingParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (const p of particlesRef.current) {
-        const dx = p.x - mouseRef.current.x;
-        const dy = p.y - mouseRef.current.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          const force = (150 - dist) / 150;
-          p.vx += (dx / dist) * force * 0.15;
-          p.vy += (dy / dist) * force * 0.15;
+        if (!isMobile) {
+          const dx = p.x - mouseRef.current.x;
+          const dy = p.y - mouseRef.current.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 150) {
+            const force = (150 - dist) / 150;
+            p.vx += (dx / dist) * force * 0.15;
+            p.vy += (dy / dist) * force * 0.15;
+          }
         }
 
         p.vx *= 0.98;
@@ -83,7 +91,9 @@ export function FloatingParticles() {
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [disabled, isMobile]);
+
+  if (disabled) return null;
 
   return (
     <canvas

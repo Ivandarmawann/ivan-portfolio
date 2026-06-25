@@ -1,13 +1,26 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import dynamic from "next/dynamic";
 
 import { AuroraBackground } from "@/components/layout/aurora-background";
-import { AnimatedGrid } from "@/components/effects/animated-grid";
-import { CursorGlow } from "@/components/effects/cursor-glow";
-import { FloatingParticles } from "@/components/effects/floating-particles";
-import { CommandPalette } from "@/components/effects/command-palette";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
+
+const AnimatedGrid = dynamic(() =>
+  import("@/components/effects/animated-grid").then((m) => ({ default: m.AnimatedGrid }))
+);
+
+const CursorGlow = dynamic(() =>
+  import("@/components/effects/cursor-glow").then((m) => ({ default: m.CursorGlow }))
+);
+
+const FloatingParticles = dynamic(() =>
+  import("@/components/effects/floating-particles").then((m) => ({ default: m.FloatingParticles }))
+);
+
+const CommandPalette = dynamic(() =>
+  import("@/components/effects/command-palette").then((m) => ({ default: m.CommandPalette }))
+);
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",

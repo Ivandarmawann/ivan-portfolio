@@ -9,6 +9,7 @@ import Link from "next/link";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 import type { Project } from "@/types/portfolio";
 
 const categoryLabels: Record<string, string> = {
@@ -62,12 +63,14 @@ const cardVariants = {
 };
 
 function useSpotlight() {
+  const isMobile = useIsMobile();
   const [mousePos, setMousePos] = React.useState({ x: 50, y: 50 });
   const [tilt, setTilt] = React.useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
 
-  const handleMouse = React.useCallback((e: React.PointerEvent) => {
+  const handleMouse = useCallback((e: React.PointerEvent) => {
+    if (isMobile) return;
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -83,9 +86,12 @@ function useSpotlight() {
       x: ((y - centerY) / centerY) * -3,
       y: ((x - centerX) / centerX) * 3,
     });
-  }, []);
+  }, [isMobile]);
 
-  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
+  const handleMouseEnter = useCallback(() => {
+    if (isMobile) return;
+    setIsHovered(true);
+  }, [isMobile]);
   const handleMouseLeave = useCallback(() => {
     setIsHovered(false);
     setTilt({ x: 0, y: 0 });
